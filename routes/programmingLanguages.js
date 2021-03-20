@@ -31,6 +31,32 @@ router.post('/save', async function(req, res, next) {
       next(err);
     }
   });
+/* update programing language */
+router.post('/update', async function(req, res, next) {
+  try {
+    res.json(await programmingLanguages.update(req.body));
+  } catch (err) {
+    console.error(`Error while update programming language`, err.message);
+    next(err);
+  }
+});
 
+router.get('/createjwt', async function(req, res, next) {
+  try {
+    res.json(await programmingLanguages.cretateJwt());
+  } catch (err) {
+    console.error(`Error while create jwt token`, err.message);
+    next(err);
+  }
 
+});
+router.post('/decodeJwt',async function(req,res,next){
+  try{
+    res.json(await programmingLanguages.decodeJwt(req.body));
+  }
+  catch(err){
+    console.error(`Error while create jwt token`, err.message);
+    next(err);
+  }
+})
 module.exports = router;
